@@ -17,9 +17,9 @@ export default function ProfilePage() {
     setUser(null);
     setRedirect("/");
   }
-  if (!ready) {
-    return "loading...";
-  }
+  // if (!ready) {
+  //   return "loading...";
+  // }
   if (ready && !user && !redirect) {
     return <Navigate to={"/login"} />;
   }
