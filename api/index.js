@@ -145,4 +145,10 @@ app.get('/places', async(req,res) => {
     res.json(await Place.find());
 })
 
+app.delete('/places/:id',async(req,res)=>{
+    const {id} = req.params;
+    await Place.findById(id).deleteOne();
+    res.json('ok');
+})
+
 app.listen(4000);
