@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const imageDownloader = require('image-downloader');
 const multer = require('multer');
 const fs = require('fs');
+const Booking = require('./models/Booking');
 require('dotenv').config()
 const app = express();
 
@@ -150,5 +151,16 @@ app.delete('/places/:id',async(req,res)=>{
     await Place.findById(id).deleteOne();
     res.json('ok');
 })
+
+app.post('/bookings', (req,res) => {
+    const {
+        place,checkIn,checkOut,numberOfGuests,name,phone,price,
+    } = req.body;
+     Booking.create ({
+        place,checkIn,checkOut,numberOfGuests,name,phone,price,
+    }).then((doc)=>{
+        res.json(doc);
+    }).catch((err)=>{throw err;})
+});
 
 app.listen(4000);
