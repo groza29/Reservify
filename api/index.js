@@ -10,6 +10,7 @@ const imageDownloader = require('image-downloader');
 const multer = require('multer');
 const fs = require('fs');
 const Booking = require('./models/Booking');
+const { resolve } = require('path');
 require('dotenv').config()
 const app = express();
 
@@ -152,15 +153,34 @@ app.delete('/places/:id',async(req,res)=>{
     res.json('ok');
 })
 
-app.post('/bookings', (req,res) => {
+app.post('/bookings', async (req,res) => {
+    const {token} = req.cookies; 
     const {
         place,checkIn,checkOut,numberOfGuests,name,phone,price,
     } = req.body;
+    jwt.verify(token,jwtSecret, {},async(err,userData)=>{
      Booking.create ({
         place,checkIn,checkOut,numberOfGuests,name,phone,price,
+        user:userData.id,
     }).then((doc)=>{
         res.json(doc);
     }).catch((err)=>{throw err;})
+})
 });
+function getUserDataFromToken(req){
+    return new Promise((resolve,reject) => {
+        jwt.verify(req.cookies.token.jwtSecret, {},async(err,userData)=>{
+            if(err) throw err;
+            resolve(userData);
+    })
+    })
+}
 
+app.get('/bookings', async (req,res) => {
+    const {token} = req.cookies; 
+    jwt.verify(token,jwtSecret, {},async(err,userData)=>{
+    res.json (await Booking.find({user:userData.id}).populate('place'))
+
+    })
+})
 app.listen(4000);
