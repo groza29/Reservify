@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import AdminNav from "../AdminNav";
+import AdminUserPage from "../AdminUserPage";
 
 export default function AdminPage() {
+  const subpage = useLocation();
   const { ready, user, setUser } = useContext(UserContext);
   const [redirect, setRedirect] = useState(null);
   async function logout() {
@@ -50,6 +52,9 @@ export default function AdminPage() {
         <div>
           <AdminNav />
         </div>
+        {subpage.pathname === "/admin" && <AdminUserPage />}
+        {/* {subpage.pathname === "/admin/places" && <AdminPlacesPage />}
+        {subpage.pathname === "/admin/bookings" && <AdminBookingsPage />} */}
       </>
     );
   }

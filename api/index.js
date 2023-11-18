@@ -183,4 +183,26 @@ app.get('/bookings', async (req,res) => {
 
     })
 })
+app.get('/admin-users', async (req,res) => {
+    res.json(await User.find({_id:{$ne:"6554a24e39d372c92793e076"} }));
+})
+app.get('/admin-users/:id',async (req,res) => {
+    const {id} = req.params;
+    res.json(await User.findById(id));
+});
+app.put('/admin-users',async (req,res)=>{
+    const {token} = req.cookies; 
+    const {id,email,name} = req.body;
+    jwt.verify(token,jwtSecret, {},async()=>{
+        const userDoc = await User.findById(id);
+            userDoc.set({email,name});
+            await userDoc.save();
+            res.json('ok');
+    });
+})
+app.delete('/admin-users/:id',async(req,res)=>{
+    const {id} = req.params;
+    await User.findById(id).deleteOne();
+    res.json('ok');
+})
 app.listen(4000);
