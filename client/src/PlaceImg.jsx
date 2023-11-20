@@ -1,18 +1,12 @@
 /* eslint-disable react/prop-types */
+import Image from "./Image.jsx";
+
 export default function PlaceImg({ place, index = 0, className = null }) {
   if (!place.photos?.length) {
-    return " ";
+    return "";
   }
   if (!className) {
     className = "object-cover";
   }
-  return (
-    <div>
-      <img
-        className={className}
-        src={"http://localhost:4000/uploads/" + place.photos[index]}
-        alt=""
-      />
-    </div>
-  );
+  return <Image className={className} src={place.photos[index]} alt="" />;
 }
