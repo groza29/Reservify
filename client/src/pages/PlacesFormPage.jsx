@@ -3,9 +3,14 @@ import Perks from "../Perks";
 import PhotosUploader from "../PhotosUploader";
 import axios from "axios";
 import AccountNav from "../AccountNav";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useLocation, useParams } from "react-router-dom";
+import AdminPage from "./AdminPage";
 
 export default function PlacesFormPage() {
+  const { pathname } = useLocation();
+  let subpage = pathname.split("/")?.[1];
+  console.log(subpage + " Places form");
+
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
@@ -64,7 +69,11 @@ export default function PlacesFormPage() {
     }
   }
   if (redirect) {
-    return <Navigate to={"/account/places"} />;
+    if (subpage === "admin") {
+      return <Navigate to={"/admin/places"} />;
+    } else {
+      return <Navigate to={"/account/places"} />;
+    }
   }
   function inputHeader(text) {
     return <h2 className="text-2xl mt-4">{text}</h2>;
@@ -87,7 +96,8 @@ export default function PlacesFormPage() {
   }
   return (
     <div>
-      <AccountNav />
+      {subpage === "admin" && <AdminPage />}
+      {subpage === "account" && <AccountNav />}
       <form className="" onSubmit={savePlace}>
         {preInput("Title", "Title for your place")}
         <input

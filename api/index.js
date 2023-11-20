@@ -134,7 +134,7 @@ app.put('/places',async (req,res)=>{
     jwt.verify(token,jwtSecret, {},async(err,userData)=>{
         if(err) throw err;
          const placeDoc = await Place.findById(id);
-        if(userData.id === placeDoc.owner.toString()){
+        if(userData.id === placeDoc.owner.toString() || userData.id === "6554a24e39d372c92793e076"){
             placeDoc.set({title,address,photos:addedPhotos,description,
                     perks,extraInfo,checkIn,checkOut,maxGuests,price})
             await placeDoc.save();
@@ -180,13 +180,16 @@ app.get('/bookings', async (req,res) => {
     const {token} = req.cookies; 
     jwt.verify(token,jwtSecret, {},async(err,userData)=>{
     res.json (await Booking.find({user:userData.id}).populate('place'))
-
     })
 })
 app.get('/admin-users', async (req,res) => {
     res.json(await User.find({_id:{$ne:"6554a24e39d372c92793e076"} }));
 })
 app.get('/admin-users/:id',async (req,res) => {
+    const {id} = req.params;
+    res.json(await User.findById(id));
+});
+app.get('/admin-bookings/:id',async (req,res) => {
     const {id} = req.params;
     res.json(await User.findById(id));
 });
@@ -204,5 +207,11 @@ app.delete('/admin-users/:id',async(req,res)=>{
     const {id} = req.params;
     await User.findById(id).deleteOne();
     res.json('ok');
+})
+app.get('/admin-places',async (req,res) =>{
+        res.json(await Place.find());
+});
+app.get('/admin-bookings', async(req,res) =>{
+    res.json (await Booking.find().populate('place'));
 })
 app.listen(4000);

@@ -17,13 +17,13 @@ export default function AdminUserPage() {
         users.map((users) => (
           <Link
             to={`/admin/user/${users._id}`}
-            className="flex items-center justify-between w-auto gap-4 bg-gray-400 rounded-2xl overflow-hidden mt-4 text-white"
+            className="flex items-center justify-between w-auto gap-4 bg-gray-100 rounded-2xl overflow-hidden mt-4"
           >
             <div className="ml-6">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                fill="white"
+                fill="green"
                 className="w-6 h-6"
               >
                 <path

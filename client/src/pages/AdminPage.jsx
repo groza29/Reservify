@@ -4,6 +4,8 @@ import { Link, Navigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import AdminNav from "../AdminNav";
 import AdminUserPage from "../AdminUserPage";
+import AdminPlacesPage from "./AdminPlacesPage";
+import AdminBookingsPage from "./AdminBookingsPage";
 
 export default function AdminPage() {
   const subpage = useLocation();
@@ -17,9 +19,9 @@ export default function AdminPage() {
   if (redirect) {
     return <Navigate to={"/login"} />;
   }
-  if (!ready) {
-    return "loading...";
-  }
+  //   if (!ready) {
+  //     return "loading...";
+  //   }
   if (!user) {
     return <Navigate to={"/login"} />;
   }
@@ -53,8 +55,8 @@ export default function AdminPage() {
           <AdminNav />
         </div>
         {subpage.pathname === "/admin" && <AdminUserPage />}
-        {/* {subpage.pathname === "/admin/places" && <AdminPlacesPage />}
-        {subpage.pathname === "/admin/bookings" && <AdminBookingsPage />} */}
+        {subpage.pathname === "/admin/places" && <AdminPlacesPage />}
+        {subpage.pathname === "/admin/bookings" && <AdminBookingsPage />}
       </>
     );
   }

@@ -35,7 +35,10 @@ function App() {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/bookings" element={<AdminPage />} />
           <Route path="/admin/places" element={<AdminPage />} />
-          <Route path="admin/user/:id" element={<UserFormPage />} />
+          <Route path="/admin/user/:id" element={<UserFormPage />} />
+          <Route path="/admin/places/new" element={<PlacesFormPage />} />
+          <Route path="/admin/places/:id" element={<PlacesFormPage />} />
+          <Route path="/admin/bookings/:id" element={<BookingPage />} />
         </Route>
       </Routes>
     </UserContextProvider>

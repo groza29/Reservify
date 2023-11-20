@@ -1,21 +1,33 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import AddressLink from "../AddressLink";
 import PlaceGallery from "../PlaceGallery";
 import BookingDates from "../BookingDates";
 
 export default function BookingPage() {
   const { id } = useParams();
+  const { pathname } = useLocation();
+  let subpage = pathname.split("/")?.[1];
+  console.log(subpage + " Bookings form");
   const [booking, setBooking] = useState(null);
   useEffect(() => {
     if (id) {
-      axios.get("/bookings").then((response) => {
-        const foundBooking = response.data.find(({ _id }) => _id === id);
-        if (foundBooking) {
-          setBooking(foundBooking);
-        }
-      });
+      if (subpage === "admin") {
+        axios.get("/admin-bookings").then((response) => {
+          const foundBooking = response.data.find(({ _id }) => _id === id);
+          if (foundBooking) {
+            setBooking(foundBooking);
+          }
+        });
+      } else {
+        axios.get("/bookings").then((response) => {
+          const foundBooking = response.data.find(({ _id }) => _id === id);
+          if (foundBooking) {
+            setBooking(foundBooking);
+          }
+        });
+      }
     }
   }, [id]);
 
