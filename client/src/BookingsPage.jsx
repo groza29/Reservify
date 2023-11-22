@@ -46,7 +46,7 @@ export default function BookingsPage() {
                       />
                     </svg>
                     <span className="text-2xl">
-                      Total price: ${booking.price}
+                      Total price: {booking.price} RON
                     </span>
                   </div>
                 </div>

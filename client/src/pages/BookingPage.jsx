@@ -13,21 +13,12 @@ export default function BookingPage() {
   const [booking, setBooking] = useState(null);
   useEffect(() => {
     if (id) {
-      if (subpage === "admin") {
-        axios.get("/admin-bookings").then((response) => {
-          const foundBooking = response.data.find(({ _id }) => _id === id);
-          if (foundBooking) {
-            setBooking(foundBooking);
-          }
-        });
-      } else {
-        axios.get("/bookings").then((response) => {
-          const foundBooking = response.data.find(({ _id }) => _id === id);
-          if (foundBooking) {
-            setBooking(foundBooking);
-          }
-        });
-      }
+      axios.get("/bookings").then((response) => {
+        const foundBooking = response.data.find(({ _id }) => _id === id);
+        if (foundBooking) {
+          setBooking(foundBooking);
+        }
+      });
     }
   }, [id]);
 
