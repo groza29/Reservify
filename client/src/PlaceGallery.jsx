@@ -47,7 +47,7 @@ export default function PlaceGallery({ place }) {
             <div>
               <img
                 onClick={() => setShowAllPhotos(true)}
-                className="aspect-square object-cover cursor-pointer"
+                className="aspect-square object-cover cursor-pointer min-w-full"
                 src={"http://localhost:4000/uploads/" + place.photos[0]}
                 alt=""
               />
@@ -58,7 +58,7 @@ export default function PlaceGallery({ place }) {
           {place.photos?.[1] && (
             <img
               onClick={() => setShowAllPhotos(true)}
-              className="aspect-square object-cover cursor-pointer"
+              className="aspect-square object-cover cursor-pointer min-w-full"
               src={"http://localhost:4000/uploads/" + place.photos[1]}
               alt=""
             />
@@ -67,7 +67,7 @@ export default function PlaceGallery({ place }) {
             {place.photos?.[2] && (
               <img
                 onClick={() => setShowAllPhotos(true)}
-                className="aspect-square object-cover relative top-2 cursor-pointer"
+                className="aspect-square object-cover relative top-2 cursor-pointer min-w-full"
                 src={"http://localhost:4000/uploads/" + place.photos[2]}
                 alt=""
               />

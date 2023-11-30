@@ -3,6 +3,19 @@ import { useEffect, useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import AdminPage from "./AdminPage";
 export default function AdminBookingPage() {
+  const getCurrentDateInput = (date) => {
+    const dateObj = new Date(date);
+
+    // get the month in this format of 04, the same for months
+    const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+    const day = ("0" + dateObj.getDate()).slice(-2);
+    const year = dateObj.getFullYear();
+
+    const shortDate = `${year}-${month}-${day}`;
+
+    return shortDate;
+  };
+
   const { id } = useParams();
   const [place, setPlace] = useState("");
   const [user, setUser] = useState("");
@@ -18,8 +31,8 @@ export default function AdminBookingPage() {
       setName(data.name);
       setPlace(data.place);
       setUser(data.user);
-      setCheckIn(data.checkIn);
-      setCheckOut(data.checkOut);
+      setCheckIn(getCurrentDateInput(data.checkIn));
+      setCheckOut(getCurrentDateInput(data.checkOut));
       setPrice(data.price);
     });
   }, [id]);
@@ -47,7 +60,10 @@ export default function AdminBookingPage() {
     await axios.delete("/admin-bookings/" + id);
     setRedirect(true);
   }
-  return (
+
+  return !checkIn ? (
+    <></>
+  ) : (
     <div>
       <div>
         <AdminPage />
@@ -62,17 +78,19 @@ export default function AdminBookingPage() {
           <input type="text" value={user} />
         </div>
         <div className="flex gap-4 items-center">
-          <h2 className="text-xl">Check in:</h2>
+          <h2 className="text-xl">Check in22:</h2>
           <input
             className="border rounded-2xl p-2"
             type="date"
             value={checkIn}
+            onChange={(ev) => setCheckIn(ev.target.value)}
           />
           <h2>Check out:</h2>
           <input
             className="border rounded-2xl p-2"
             type="date"
             value={checkOut}
+            onChange={(ev) => setCheckOut(ev.target.value)}
           />
         </div>
         <div className="flex gap-4 items-center">

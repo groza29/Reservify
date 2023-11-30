@@ -17,13 +17,13 @@ export default function AdminPage() {
     setRedirect("/");
   }
   if (redirect) {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/"} />;
   }
   //   if (!ready) {
   //     return "loading...";
   //   }
   if (!user) {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/"} />;
   }
   if (ready && user.email === "admin@gmail.com") {
     return (
