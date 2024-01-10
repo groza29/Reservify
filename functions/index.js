@@ -59,7 +59,7 @@ const options = [
         origin: '*',
         methods: '*',
         allowedHeaders: ['Content-Type', 'Authorization'],
-        credentials: true,
+        credentials: false,
     })
 ];
 

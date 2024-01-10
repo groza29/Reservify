@@ -1,14 +1,14 @@
 /* eslint-disable react/no-unknown-property */
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
 export default function Header() {
   const { user } = useContext(UserContext);
-  const [searchInput, setSearchInput] = useState("");
-  const handleChange = (e) => {
-    e.preventDefault();
-    setSearchInput(e.target.value);
-  };
+  // const [searchInput, setSearchInput] = useState("");
+  // const handleChange = (e) => {
+  //   e.preventDefault();
+  //   setSearchInput(e.target.value);
+  // };
   return (
     <header className=" flex justify-between">
       <Link to={"/"} href="" className="flex items-center gap-1">
@@ -23,7 +23,7 @@ export default function Header() {
         {/* <span className="font-bold text-xl">Reservify</span>{" "} */}
         <img src="/reservify.svg" className="w-20 h-20" alt="" />
       </Link>
-      <div className="flex gap-3 border border-gray-300 rounded-full py-2 px-4 shadow-md shadow-gry-300 ">
+      {/* <div className="flex gap-3 border border-gray-300 rounded-full py-2 px-4 shadow-md shadow-gry-300 ">
         <input
           type="text"
           placeholder="Search here"
@@ -46,7 +46,7 @@ export default function Header() {
             />
           </svg>
         </button>
-      </div>
+      </div> */}
       <Link
         to={user ? "/account" : "/login"}
         className="flex items-center gap-3 border border-gray-300 rounded-full py-2 px-4 shadow-md "

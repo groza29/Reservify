@@ -20,7 +20,7 @@ axios.defaults.headers = {
 };
 axios.defaults.baseURL =
   "https://us-central1-reservify-f1cff.cloudfunctions.net/api";
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 function App() {
   return (

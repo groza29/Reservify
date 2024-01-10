@@ -14,7 +14,7 @@ export default function LoginPage() {
       const { data } = await axios.post(
         "/login",
         { email, password },
-        { withCredentials: true }
+        { withCredentials: false }
       );
       setUser(data);
       alert("Login successful!");
