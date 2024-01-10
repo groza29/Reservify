@@ -15,7 +15,11 @@ import BookingPage from "./pages/BookingPage";
 import AdminPage from "./pages/AdminPage";
 import UserFormPage from "./pages/UserFormPage";
 import AdminBookingPage from "./pages/AdminBookingPage";
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.headers = {
+  "Access-Control-Allow-Origin": "*",
+};
+axios.defaults.baseURL =
+  "https://us-central1-reservify-f1cff.cloudfunctions.net/api";
 axios.defaults.withCredentials = true;
 
 function App() {
